@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
   ];
 
   shellHook = ''
-    export LD_LIBRARY_PATH="${vulkan-loader}/lib:$LD_LIBRARY_PATH"
+    export LD_LIBRARY_PATH="${vulkan-loader}/lib:$LD_LIBRARY_PATH";
     export CC="clang";
     export CXX="clang++";
   '';
