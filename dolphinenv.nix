@@ -12,8 +12,9 @@ stdenv.mkDerivation rec {
     mbedtls git pugixml python37
     llvm_9
     bluezFull udev libevdev alsaLib vulkan-loader
+    # ((qt5.override { developerBuild = true; }).full)
     qt5.full
-    wayland
+    wayland.all
     ninja
   ];
 

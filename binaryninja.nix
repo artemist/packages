@@ -7,7 +7,8 @@ let
     name = "binaryninja-fhs-env";
     targetPkgs = pkgs: with pkgs; [
       # Tools
-      (python37Full.withPackages(ps: [ python37Packages.pip python37Packages.pygments ]))
+      (python27Full.withPackages(ps: [ python37Packages.pip python37Packages.pygments ]))
+      (python38Full.withPackages(ps: [ python37Packages.pip python37Packages.pygments ]))
       bash
       curlFull
       git
