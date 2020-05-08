@@ -19,6 +19,7 @@ let
       expat
       fontconfig
       freetype
+      gcc-unwrapped
       glib
       gtk3
       icu
@@ -64,7 +65,8 @@ cat >$out/bin/binaryninja <<EOF
 
 test -f ${binjaDir}/qt.conf.old || cp ${binjaDir}/qt.conf ${binjaDir}/qt.conf.old
 # cp ${qt}/bin/qt.conf ${binjaDir}/qt.conf
-${fhsEnv}/bin/binaryninja-fhs-env -c "LD_LIBRARY_PATH="${binjaDir}:\\\$LD_LIBRARY_PATH" ${binjaDir}/binaryninja \$*"
+# ${fhsEnv}/bin/binaryninja-fhs-env -c "LD_LIBRARY_PATH=\"${binjaDir}:\$LD_LIBRARY_PATH\" ${binjaDir}/binaryninja \$*"
+exec ${fhsEnv}/bin/binaryninja-fhs-env -c "${binjaDir}/binaryninja \$*"
 EOF
 
 chmod +x $out/bin/binaryninja

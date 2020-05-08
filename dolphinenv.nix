@@ -14,6 +14,7 @@ stdenv.mkDerivation rec {
     bluezFull udev libevdev alsaLib vulkan-loader
     # ((qt5.override { developerBuild = true; }).full)
     qt5.full
+    libffi
     wayland.all
     ninja
   ];
