@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
     curl ffmpeg libao libGLU pcre gettext libpthreadstubs libpulseaudio
     libXrandr libXext libXi libXxf86vm libXinerama libSM readline openal libXdmcp lzo
     portaudio libusb libpng hidapi miniupnpc enet mbedtls soundtouch sfml
-    mbedtls git pugixml python37
+    mbedtls git pugixml python38
     llvm_9
     bluezFull udev libevdev alsaLib vulkan-loader
     # ((qt5.override { developerBuild = true; }).full)

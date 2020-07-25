@@ -14,5 +14,9 @@
     kernelPackages = pkgs.linuxPackages_latest;
     blacklistedKernelModules = [ "nouveau" ];
   };
-  environment.systemPackages = with pkgs; [ htop tmux neovim ];
+  environment.systemPackages = with pkgs; [
+    htop tmux neovim
+    lsof
+    binutils-unwrapped  # for strings
+  ];
 }
