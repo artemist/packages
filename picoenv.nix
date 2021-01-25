@@ -8,13 +8,19 @@ let
     sha256 = "1hdfy7nzcgzs4y68hq6gczh02v75kw4az0hgbzxsvs13796j3fx3";
     fetchSubmodules = true;
   };
+  sdk_src = fetchFromGitHub {
+    owner = "raspberrypi";
+    repo = "pico-sdk";
+    fetchSubmodules = true;
+    rev = "0f3b7951167cf672afdcb34a58ddd0e363ae886f";
+    sha256 = "1mq66v8dndjsv8ddkmphb2bhmgjnsyqb142f1hbqlckqzra2vqml";
+  };
   openocd_picoprobe = openocd.overrideAttrs (oldAttrs: rec {
     src = openocd_src;
     configureFlags = oldAttrs.configureFlags ++ [ "--enable-picoprobe" ];
   });
-
 in
-stdenv.mkShell rec {
+mkShell rec {
   name = "pico-env";
 
   nativeBuildInputs = [ pkgconfig ];
@@ -23,12 +29,10 @@ stdenv.mkShell rec {
     gnumake cmake ninja
     python3
     gcc
-
     libusb
-
     openocd_picoprobe
-
-    pkgsCross.arm-embedded.buildPackages.gcc
-    pkgsCross.arm-embedded.buildPackages.binutils
+    gcc-arm-embedded
   ];
+
+  PICO_SDK_PATH = sdk_src;
 }
