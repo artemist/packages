@@ -23,4 +23,3 @@ buildFHSUserEnv {
 
   # runScript = "/home/artemis/.local/matlab/bin/matlab";
 }
-

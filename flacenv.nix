@@ -6,7 +6,8 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkgconfig autoconf automake libtool clang_9 ];
 
   buildInputs = [
-    gettext libogg
+    gettext
+    libogg
   ];
 
   shellHook = ''

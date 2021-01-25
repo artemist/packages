@@ -5,7 +5,7 @@ buildFHSUserEnv {
   targetPkgs = pkgs: with pkgs; [
     python27
     python37
-    
+
     SDL2
     cairo
     expat
@@ -37,4 +37,3 @@ buildFHSUserEnv {
     zlib
   ];
 }
-

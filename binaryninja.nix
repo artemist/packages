@@ -1,5 +1,4 @@
 with import <nixpkgs> { };
-
 let
   qt = pkgs.qt5.full;
   binjaDir = "/home/artemis/.local/applications/binaryninja";
@@ -7,8 +6,8 @@ let
     name = "binaryninja-fhs-env";
     targetPkgs = pkgs: with pkgs; [
       # Tools
-      (python27Full.withPackages(ps: [ python37Packages.pip python37Packages.pygments ]))
-      (python38Full.withPackages(ps: [ python37Packages.pip python37Packages.pygments ]))
+      (python27Full.withPackages (ps: [ python37Packages.pip python37Packages.pygments ]))
+      (python38Full.withPackages (ps: [ python37Packages.pip python37Packages.pygments ]))
       bash
       curlFull
       git
@@ -58,24 +57,25 @@ let
     genericName = "binja";
   };
 
-in runCommand "binaryninja" {} ''
-mkdir -p $out/bin $out/share/applications
-cat >$out/bin/binaryninja <<EOF
-#!${bash}/bin/bash
+in
+runCommand "binaryninja" { } ''
+  mkdir -p $out/bin $out/share/applications
+  cat >$out/bin/binaryninja <<EOF
+  #!${bash}/bin/bash
 
-test -f ${binjaDir}/qt.conf.old || cp ${binjaDir}/qt.conf ${binjaDir}/qt.conf.old
-# cp ${qt}/bin/qt.conf ${binjaDir}/qt.conf
-# ${fhsEnv}/bin/binaryninja-fhs-env -c "LD_LIBRARY_PATH=\"${binjaDir}:\$LD_LIBRARY_PATH\" ${binjaDir}/binaryninja \$*"
-exec ${fhsEnv}/bin/binaryninja-fhs-env -c "${binjaDir}/binaryninja \$*"
-EOF
+  test -f ${binjaDir}/qt.conf.old || cp ${binjaDir}/qt.conf ${binjaDir}/qt.conf.old
+  # cp ${qt}/bin/qt.conf ${binjaDir}/qt.conf
+  # ${fhsEnv}/bin/binaryninja-fhs-env -c "LD_LIBRARY_PATH=\"${binjaDir}:\$LD_LIBRARY_PATH\" ${binjaDir}/binaryninja \$*"
+  exec ${fhsEnv}/bin/binaryninja-fhs-env -c "${binjaDir}/binaryninja \$*"
+  EOF
 
-chmod +x $out/bin/binaryninja
+  chmod +x $out/bin/binaryninja
 
-cat >$out/bin/scc <<EOF
-#!${bash}/bin/bash
-${fhsEnv}/bin/binaryninja-fhs-env -c "${binjaDir}/plugins/scc \$*"
-EOF
-chmod +x $out/bin/scc
+  cat >$out/bin/scc <<EOF
+  #!${bash}/bin/bash
+  ${fhsEnv}/bin/binaryninja-fhs-env -c "${binjaDir}/plugins/scc \$*"
+  EOF
+  chmod +x $out/bin/scc
 
-cp ${desktopItem}/share/applications/* $out/share/applications/
+  cp ${desktopItem}/share/applications/* $out/share/applications/
 ''

@@ -7,9 +7,20 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     gnumake
-    gcc binutils
-    flex bison gmp libmpc mpfr
-    libelf ncurses
-    nettools bc libelf cpio openssl perl
+    gcc
+    binutils
+    flex
+    bison
+    gmp
+    libmpc
+    mpfr
+    libelf
+    ncurses
+    nettools
+    bc
+    libelf
+    cpio
+    openssl
+    perl
   ];
 }

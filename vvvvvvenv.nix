@@ -5,7 +5,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ cmake pkgconfig ninja valgrind ccache clang_9 llvm_9 ];
 
-  buildInputs =  [
+  buildInputs = [
     SDL2
     SDL2_mixer
   ];

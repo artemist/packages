@@ -1,5 +1,5 @@
 # Build with `nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix`
-{config, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix>
@@ -15,8 +15,10 @@
     blacklistedKernelModules = [ "nouveau" ];
   };
   environment.systemPackages = with pkgs; [
-    htop tmux neovim
+    htop
+    tmux
+    neovim
     lsof
-    binutils-unwrapped  # for strings
+    binutils-unwrapped # for strings
   ];
 }

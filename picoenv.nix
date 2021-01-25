@@ -1,5 +1,4 @@
 with import <nixpkgs> { };
-
 let
   openocd_src = fetchFromGitHub {
     owner = "raspberrypi";
@@ -26,7 +25,9 @@ mkShell rec {
   nativeBuildInputs = [ pkgconfig ];
 
   buildInputs = [
-    gnumake cmake ninja
+    gnumake
+    cmake
+    ninja
     python3
     gcc
     libusb
