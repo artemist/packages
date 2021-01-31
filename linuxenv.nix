@@ -6,21 +6,24 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkgconfig ];
 
   buildInputs = [
-    gnumake
-    gcc
-    binutils
-    flex
+    bc
     bison
+    cpio
+    elfutils
+    flex
     gmp
+    gnumake
     libmpc
     mpfr
-    libelf
     ncurses
     nettools
-    bc
-    libelf
-    cpio
     openssl
     perl
+    python3
+    
+    binutils
+    gcc
+    pkgsCross.aarch64-multiplatform.buildPackages.binutils
+    pkgsCross.aarch64-multiplatform.buildPackages.gcc
   ];
 }
