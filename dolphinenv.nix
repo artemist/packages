@@ -3,11 +3,13 @@ with import <nixpkgs> { };
 stdenv.mkDerivation rec {
   name = "dolphin-env";
 
-  nativeBuildInputs = [ cmake pkgconfig clang-tools ccache clang_9 ];
+  nativeBuildInputs = [ cmake pkgconfig clang-tools ccache clang_9 ninja ];
 
   buildInputs = with xorg; with xlibs; [
     curl
     ffmpeg
+    fmt
+    xz
     libao
     libGLU
     pcre

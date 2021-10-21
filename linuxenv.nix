@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     openssl
     perl
     python3
-    
+
     binutils
     gcc
     pkgsCross.aarch64-multiplatform.buildPackages.binutils
