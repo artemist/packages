@@ -51,6 +51,38 @@ let
       maintainers = with maintainers; [ artemist ];
     };
   };
+  esp-idf = fetchFromGitHub {
+    owner = "espressif";
+    repo = "esp-idf";
+    rev = "v4.3.1";
+    sha256 = "1zhlmbgrif3v8ddy5cgxwxf6wwk9gxwj5ny0z3rd22ajh2f1s8zr";
+    fetchSubmodules = true;
+  };
+  xtensa-esp32-elf = stdenv.mkDerivation rec {
+    pname = "xtensa-esp32-elf-gcc";
+    version = "2021r1";
+    src = builtins.fetchTarball {
+      url = "https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32-elf-gcc8_4_0-esp-2021r1-linux-amd64.tar.gz";
+      sha256 = "1xdcskwkrg15kphjqv1nwb1xvmsbc411vibk8jfj3x75p81s9cgs";
+    };
+
+    nativeBuildInputs = [
+      autoPatchelfHook
+    ];
+
+    buildInputs = [
+      python27
+      gcc-unwrapped.lib
+    ];
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out
+      cp -R $src $out/xtensa-esp32-elf
+      runHook postInstall
+    '';
+  };
+
 in
 mkShell rec {
   packages = [
@@ -77,4 +109,6 @@ mkShell rec {
   ZEPHYR_TOOLCHAIN_VARIANT = "zephyr";
   ZEPHYR_SDK_INSTALL_DIR = "${zephyr-sdk}";
   ZEPHYR_BASE = "/home/artemis/repos/public/zephyr/zephyr";
+  ESP_IDF_PATH = "${esp-idf}";
+  ESPRESSIF_TOOLCHAIN_PATH = "${xtensa-esp32-elf}/xtensa-esp32-elf";
 }
