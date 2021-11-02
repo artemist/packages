@@ -55,7 +55,8 @@ let
     owner = "espressif";
     repo = "esp-idf";
     rev = "v4.3.1";
-    sha256 = "1zhlmbgrif3v8ddy5cgxwxf6wwk9gxwj5ny0z3rd22ajh2f1s8zr";
+    sha256 = "1pafcylpp8ladmkb24g78fzridiw5g3j21jspdbgf5kpk6gi76qk";
+    leaveDotGit = true;
     fetchSubmodules = true;
   };
   xtensa-esp32-elf = stdenv.mkDerivation rec {
