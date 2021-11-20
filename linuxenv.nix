@@ -1,6 +1,5 @@
-with import <nixpkgs> { };
-
-stdenv.mkDerivation rec {
+{ pkgs }:
+with pkgs; stdenv.mkDerivation rec {
   name = "linux-env";
 
   nativeBuildInputs = [ pkgconfig ];

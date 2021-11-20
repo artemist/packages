@@ -1,4 +1,4 @@
-with import <nixpkgs> { };
+{ stdenv, lib, fetchFromGitHub, pkg-config, libusb }:
 
 stdenv.mkDerivation rec {
   pname = "imx_usb_loader";
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
     make install prefix=$out
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = https://github.com/boundarydevices/imx_usb_loader;
     license = licenses.lgpl21;
     description = "USB & UART loader for i.MX5/6/7/8 series";

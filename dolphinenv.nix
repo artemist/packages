@@ -1,6 +1,6 @@
-with import <nixpkgs> { };
+{ pkgs }:
 
-stdenv.mkDerivation rec {
+with pkgs; stdenv.mkDerivation rec {
   name = "dolphin-env";
 
   nativeBuildInputs = [ cmake pkgconfig clang-tools ccache clang_9 ninja ];
