@@ -1,5 +1,5 @@
-with import <nixpkgs> { };
-
+{ pkgs }:
+with pkgs;
 let
   zephyr-sdk = stdenv.mkDerivation rec {
     pname = "zephyr-sdk";

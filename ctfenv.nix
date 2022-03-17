@@ -1,5 +1,4 @@
-with import <nixpkgs> { };
-
+{ pkgs }: with pkgs;
 buildFHSUserEnv {
   name = "ctfenv";
   targetPkgs = pkgs: with pkgs; [
