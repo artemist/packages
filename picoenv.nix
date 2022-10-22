@@ -4,8 +4,8 @@ let
     fetchSubmodules = true;
     owner = "raspberrypi";
     repo = "pico-sdk";
-    rev = "1.3.1";
-    sha256 = "sha256-Xf8QSQIe7XCMunljioC5/MhXcuTmyN7J6pPQFM3ico8=";
+    rev = "1.4.0";
+    sha256 = "sha256-i3IAaNcd0EfKNvU104a776O1poDAChlx1m+nP8iFn8E=";
   };
 in
 mkShell rec {

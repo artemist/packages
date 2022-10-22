@@ -1,9 +1,9 @@
 with import <nixpkgs> { };
 
-stdenv.mkDerivation rec {
-  name = "dolphin-env";
+mkShell {
+  name = "yuzu-env";
 
-  nativeBuildInputs = [ cmake pkg-config clang-tools ccache ninja llvmPackages_latest.clang ];
+  nativeBuildInputs = [ cmake pkg-config clang-tools ccache ninja llvmPackages_14.clang ];
 
   buildInputs = with qt5; [
     libpulseaudio
@@ -20,16 +20,18 @@ stdenv.mkDerivation rec {
     zlib
     zstd
     libzip
+    libva
     lz4
     glslang
     boost173
     catch2
-    fmt
+    fmt_8
     SDL2
     udev
     libusb1
     ffmpeg
     wayland.all
+    pipewire
   ];
 
   shellHook = ''
