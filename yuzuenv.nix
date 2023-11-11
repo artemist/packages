@@ -1,41 +1,53 @@
 with import <nixpkgs> { };
 
+let
+  qt = qt5;
+  qtPlugins = with qt; [ qtbase qtwayland qttools qtwebengine ];
+  pluginPath = lib.makeSearchPath
+    qt.qtbase.qtPluginPrefix
+    (builtins.map lib.getBin qtPlugins);
+  qmlPath = lib.makeSearchPath
+    qt.qtbase.qtQmlPrefix
+    (builtins.map lib.getBin qtPlugins);
+
+in
 mkShell {
   name = "yuzu-env";
 
-  nativeBuildInputs = [ cmake pkg-config clang-tools ccache ninja llvmPackages_14.clang ];
+  nativeBuildInputs = [ cmake pkg-config clang-tools ccache ninja llvmPackages_14.clang gdb ];
 
-  buildInputs = with qt5; [
-    libpulseaudio
-    libjack2
+  buildInputs = [
+    SDL2
     alsa-lib
-    sndio
-    vulkan-loader
-    vulkan-headers
-    qtbase
-    qtwebengine
-    qttools
-    nlohmann_json
-    rapidjson
-    zlib
-    zstd
-    libzip
-    libva
-    lz4
-    glslang
     boost173
     catch2
-    fmt_8
-    SDL2
-    udev
-    libusb1
+    enet
     ffmpeg
-    wayland.all
+    fmt_9
+    glslang
+    libjack2
+    libpulseaudio
+    libusb1
+    libva
+    libzip
+    lz4
+    nlohmann_json
     pipewire
-  ];
+    rapidjson
+    sndio
+    udev
+    vulkan-headers
+    vulkan-loader
+    wayland.all
+    zlib
+    zstd
+  ] ++ qtPlugins;
 
+
+  LD_LIBRARY_PATH = "${vulkan-loader}/lib:$LD_LIBRARY_PATH";
+  QT_PLUGIN_PATH = "${pluginPath}";
+  QML2_IMPORT_PATH = "${qmlPath}";
   shellHook = ''
-    export LD_LIBRARY_PATH="${vulkan-loader}/lib:$LD_LIBRARY_PATH";
     export CC="clang";
     export CXX="clang++";
   '';

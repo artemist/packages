@@ -25,5 +25,11 @@ with pkgs; stdenv.mkDerivation rec {
     pkgsCross.aarch64-multiplatform.buildPackages.binutils
     pkgsCross.aarch64-multiplatform.buildPackages.gcc
     gcc-arm-embedded
+
+    libllvm
+    clang
+    lld
+    rust-bindgen
+    rustup
   ];
 }
